@@ -7,11 +7,8 @@ import { PostServiceBase } from "../services/PostIocServices";
 
 @Path("/posts")
 export class PostRoutesController {
+  @Inject
   private injectedService: PostServiceBase;
-
-  constructor(@Inject injectedService: PostServiceBase) {
-    this.injectedService = injectedService;
-  }
 
   @POST
   private createNewPost(post: PostType): Promise<String> {

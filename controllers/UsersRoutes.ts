@@ -7,11 +7,9 @@ import { UserServiceBase } from "../services/UserIocService";
 
 @Path("/users")
 export class UserRoutesController {
+  @Inject
   private injectedService: UserServiceBase;
 
-  constructor(@Inject injectedService: UserServiceBase) {
-    this.injectedService = injectedService;
-  }
   @POST
   private createNewUser(user: UserType): Promise<string> {
     return this.injectedService.createNewUser(user);

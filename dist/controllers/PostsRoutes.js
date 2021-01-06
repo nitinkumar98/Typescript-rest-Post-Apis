@@ -17,9 +17,6 @@ const typescript_rest_1 = require("typescript-rest");
 const typescript_ioc_1 = require("typescript-ioc");
 const PostIocServices_1 = require("../services/PostIocServices");
 let PostRoutesController = class PostRoutesController {
-    constructor(injectedService) {
-        this.injectedService = injectedService;
-    }
     createNewPost(post) {
         return this.injectedService.createNewPost(post);
     }
@@ -45,6 +42,10 @@ let PostRoutesController = class PostRoutesController {
         return this.injectedService.toLikePost(id, user);
     }
 };
+__decorate([
+    typescript_ioc_1.Inject,
+    __metadata("design:type", PostIocServices_1.PostServiceBase)
+], PostRoutesController.prototype, "injectedService", void 0);
 __decorate([
     typescript_rest_1.POST,
     __metadata("design:type", Function),
@@ -106,8 +107,6 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], PostRoutesController.prototype, "toLikePost", null);
 PostRoutesController = __decorate([
-    typescript_rest_1.Path("/posts"),
-    __param(0, typescript_ioc_1.Inject),
-    __metadata("design:paramtypes", [PostIocServices_1.PostServiceBase])
+    typescript_rest_1.Path("/posts")
 ], PostRoutesController);
 exports.PostRoutesController = PostRoutesController;

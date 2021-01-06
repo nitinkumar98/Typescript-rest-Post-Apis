@@ -17,9 +17,6 @@ const typescript_rest_1 = require("typescript-rest");
 const typescript_ioc_1 = require("typescript-ioc");
 const UserIocService_1 = require("../services/UserIocService");
 let UserRoutesController = class UserRoutesController {
-    constructor(injectedService) {
-        this.injectedService = injectedService;
-    }
     createNewUser(user) {
         return this.injectedService.createNewUser(user);
     }
@@ -36,6 +33,10 @@ let UserRoutesController = class UserRoutesController {
         return this.injectedService.getAllMessagesOfUser(id);
     }
 };
+__decorate([
+    typescript_ioc_1.Inject,
+    __metadata("design:type", UserIocService_1.UserServiceBase)
+], UserRoutesController.prototype, "injectedService", void 0);
 __decorate([
     typescript_rest_1.POST,
     __metadata("design:type", Function),
@@ -73,8 +74,6 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UserRoutesController.prototype, "getAllMessagesOfUser", null);
 UserRoutesController = __decorate([
-    typescript_rest_1.Path("/users"),
-    __param(0, typescript_ioc_1.Inject),
-    __metadata("design:paramtypes", [UserIocService_1.UserServiceBase])
+    typescript_rest_1.Path("/users")
 ], UserRoutesController);
 exports.UserRoutesController = UserRoutesController;
