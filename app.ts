@@ -10,17 +10,15 @@ Server.buildServices(app, ...Routes);
 
 app.listen(8080, () => {
   console.log("Server listening on port 8080");
-  mongoose
-    .connect(url, {
+  try {
+    mongoose.connect(url, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useFindAndModify: false,
       useCreateIndex: true,
-    })
-    .then(() => {
-      console.log("mongoose connected");
-    })
-    .catch((error) => {
-      console.log(error);
     });
+    console.log("Database connected");
+  } catch (error) {
+    console.log(error);
+  }
 });

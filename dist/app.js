@@ -12,17 +12,22 @@ let app = express_1.default();
 typescript_rest_1.Server.buildServices(app, ...index_1.default);
 app.listen(8080, () => {
     console.log("Server listening on port 8080");
-    mongoose_1.default
-        .connect(url, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        useFindAndModify: false,
-        useCreateIndex: true,
-    })
-        .then(() => {
-        console.log("mongoose connected");
-    })
-        .catch((error) => {
+    try {
+        mongoose_1.default.connect(url, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            useFindAndModify: false,
+            useCreateIndex: true,
+        });
+        console.log("Database connected");
+    }
+    catch (error) {
         console.log(error);
-    });
+    }
+    // .then(() => {
+    //   console.log("mongoose connected");
+    // })
+    // .catch((error) => {
+    //   console.log(error);
+    // });
 });
