@@ -1,4 +1,4 @@
-import { UserRoutesController } from "./UsersRoutes";
-import { PostRoutesController } from "./PostsRoutes";
+import { UserRoutesController } from "./UserRoutesController";
+import { PostRoutesController } from "./PostRoutesController";
 
 export default [UserRoutesController, PostRoutesController];
