@@ -1,5 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const UsersRoutes_1 = require("./UsersRoutes");
-const PostsRoutes_1 = require("./PostsRoutes");
-exports.default = [UsersRoutes_1.UserRoutesController, PostsRoutes_1.PostRoutesController];
+const UserRoutesController_1 = require("./UserRoutesController");
+const PostRoutesController_1 = require("./PostRoutesController");
+exports.default = [UserRoutesController_1.UserRoutesController, PostRoutesController_1.PostRoutesController];

@@ -24,10 +24,4 @@ app.listen(8080, () => {
     catch (error) {
         console.log(error);
     }
-    // .then(() => {
-    //   console.log("mongoose connected");
-    // })
-    // .catch((error) => {
-    //   console.log(error);
-    // });
 });
