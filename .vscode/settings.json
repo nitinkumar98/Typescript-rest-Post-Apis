@@ -1,8 +1,0 @@
-{
-  "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "javascript.updateImportsOnFileMove.enabled": "always",
-  "workbench.editorAssociations": [],
-  "js/ts.implicitProjectConfig.experimentalDecorators": true,
-  "typescript.tsdk": "node_modules/typescript/lib"
-}
