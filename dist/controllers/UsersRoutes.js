@@ -11,109 +11,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserRoutesController = void 0;
 const typescript_rest_1 = require("typescript-rest");
-const UserModel_1 = __importDefault(require("../models/UserModel"));
-const MessageModel_1 = __importDefault(require("../models/MessageModel"));
-const mongoose_1 = __importDefault(require("mongoose"));
+const typescript_ioc_1 = require("typescript-ioc");
+const UserIocService_1 = require("../services/UserIocService");
 let UserRoutesController = class UserRoutesController {
+    constructor(injectedService) {
+        this.injectedService = injectedService;
+    }
     createNewUser(user) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                yield UserModel_1.default.create(user);
-                return "User created";
-            }
-            catch (error) {
-                return error;
-            }
-        });
+        return this.injectedService.createNewUser(user);
     }
     getUserByid(id) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                return yield UserModel_1.default.findById(id);
-            }
-            catch (error) {
-                return error;
-            }
-        });
+        return this.injectedService.getUserByid(id);
     }
     getAllUsers() {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                return yield UserModel_1.default.find({});
-            }
-            catch (error) {
-                return error;
-            }
-        });
+        return this.injectedService.getAllUsers();
     }
     sendMessagesToUsers(id, message) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                message.sendBy = id;
-                message.roomId = (id + message.receiveBy).split("").sort().join("");
-                //message.roomId = [message.receiveBy, message.sendBy].sort().join("");
-                yield MessageModel_1.default.create(message);
-                return "Message send successfully!";
-            }
-            catch (error) {
-                return error;
-            }
-        });
+        return this.injectedService.sendMessagesToUsers(id, message);
     }
     getAllMessagesOfUser(id) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                return yield MessageModel_1.default.aggregate([
-                    {
-                        $match: {
-                            $or: [
-                                { sendBy: mongoose_1.default.Types.ObjectId(id) },
-                                { receiveBy: mongoose_1.default.Types.ObjectId(id) },
-                            ],
-                        },
-                    },
-                    {
-                        $project: {
-                            _id: 0,
-                            text: 1,
-                            sendBy: 1,
-                            receiveBy: 1,
-                            createdAt: 1,
-                            roomId: 1,
-                        },
-                    },
-                    { $sort: { createdAt: -1 } },
-                    {
-                        $group: {
-                            _id: "$roomId",
-                            text: { $first: "$text" },
-                            sendBy: { $first: "$sendBy" },
-                            receiveBy: { $first: "$receiveBy" },
-                            createdAt: { $first: "$createdAt" },
-                        },
-                    },
-                    { $sort: { createdAt: -1 } },
-                ]);
-            }
-            catch (error) {
-                return error;
-            }
-        });
+        return this.injectedService.getAllMessagesOfUser(id);
     }
 };
 __decorate([
@@ -153,6 +73,8 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UserRoutesController.prototype, "getAllMessagesOfUser", null);
 UserRoutesController = __decorate([
-    typescript_rest_1.Path("/users")
+    typescript_rest_1.Path("/users"),
+    __param(0, typescript_ioc_1.Inject),
+    __metadata("design:paramtypes", [UserIocService_1.UserServiceBase])
 ], UserRoutesController);
 exports.UserRoutesController = UserRoutesController;

@@ -11,122 +11,38 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PostRoutesController = void 0;
-const PostModel_1 = __importDefault(require("../models/PostModel"));
 const typescript_rest_1 = require("typescript-rest");
-const CommentModel_1 = __importDefault(require("../models/CommentModel"));
+const typescript_ioc_1 = require("typescript-ioc");
+const PostIocServices_1 = require("../services/PostIocServices");
 let PostRoutesController = class PostRoutesController {
+    constructor(injectedService) {
+        this.injectedService = injectedService;
+    }
     createNewPost(post) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                yield PostModel_1.default.create(post);
-                return "Post created";
-            }
-            catch (error) {
-                return error;
-            }
-        });
+        return this.injectedService.createNewPost(post);
     }
     getPostById(id) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                return yield PostModel_1.default.findById(id);
-            }
-            catch (error) {
-                return error;
-            }
-        });
+        return this.injectedService.getPostById(id);
     }
     getAllPosts() {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                return yield PostModel_1.default.find({});
-            }
-            catch (error) {
-                return error;
-            }
-        });
+        return this.injectedService.getAllPosts();
     }
     updatePostById(id, postData) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                yield PostModel_1.default.findByIdAndUpdate(id, postData);
-                return "post updated";
-            }
-            catch (error) {
-                return error;
-            }
-        });
+        return this.injectedService.updatePostById(id, postData);
     }
     deletePostById(id) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                yield PostModel_1.default.findByIdAndDelete(id);
-                return "Post deleted successfully!";
-            }
-            catch (error) {
-                return error;
-            }
-        });
+        return this.injectedService.deletePostById(id);
     }
     toCommentsOnPost(id, commentData) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                commentData.onPost = id;
-                yield CommentModel_1.default.create(commentData);
-                return "Comment created successfully!!";
-            }
-            catch (error) {
-                return error;
-            }
-        });
+        return this.injectedService.toCommentsOnPost(id, commentData);
     }
     toGetAllCommentsOnPost(id) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                return yield CommentModel_1.default.find({ onPost: id }).populate("commentedBy");
-            }
-            catch (error) {
-                return error;
-            }
-        });
+        return this.injectedService.toGetAllCommentsOnPost(id);
     }
     toLikePost(id, user) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const userId = user.likedBy;
-                yield PostModel_1.default.findByIdAndUpdate(id, {
-                    $inc: { likes: 1 },
-                    $push: {
-                        likes_by: {
-                            $each: [
-                                {
-                                    userId,
-                                },
-                            ],
-                            $position: 0,
-                        },
-                    },
-                }, { new: true });
-                return "Someone liked the post";
-            }
-            catch (error) {
-                return error;
-            }
-        });
+        return this.injectedService.toLikePost(id, user);
     }
 };
 __decorate([
@@ -190,6 +106,8 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], PostRoutesController.prototype, "toLikePost", null);
 PostRoutesController = __decorate([
-    typescript_rest_1.Path("/posts")
+    typescript_rest_1.Path("/posts"),
+    __param(0, typescript_ioc_1.Inject),
+    __metadata("design:paramtypes", [PostIocServices_1.PostServiceBase])
 ], PostRoutesController);
 exports.PostRoutesController = PostRoutesController;

@@ -8,18 +8,21 @@ const typescript_rest_1 = require("typescript-rest");
 const mongoose_1 = __importDefault(require("mongoose"));
 const index_1 = __importDefault(require("./controllers/index"));
 const url = "mongodb://localhost/tposts";
-mongoose_1.default
-    .connect(url, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false,
-    useCreateIndex: true,
-})
-    .catch((error) => {
-    console.log(error);
-});
 let app = express_1.default();
 typescript_rest_1.Server.buildServices(app, ...index_1.default);
-app.listen(8080, function () {
+app.listen(8080, () => {
     console.log("Server listening on port 8080");
+    mongoose_1.default
+        .connect(url, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useFindAndModify: false,
+        useCreateIndex: true,
+    })
+        .then(() => {
+        console.log("mongoose connected");
+    })
+        .catch((error) => {
+        console.log(error);
+    });
 });

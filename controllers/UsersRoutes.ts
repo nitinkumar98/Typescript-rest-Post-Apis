@@ -1,95 +1,47 @@
 import { Path, GET, PathParam, POST, PATCH } from "typescript-rest";
-import User, { UserType } from "../models/UserModel";
-import Message, { MessageType } from "../models/MessageModel";
-import mongoose from "mongoose";
+import { Inject } from "typescript-ioc";
+
+import { UserType } from "../models/UserModel";
+import { MessageType } from "../models/MessageModel";
+import { UserServiceBase } from "../services/UserIocService";
 
 @Path("/users")
 export class UserRoutesController {
+  private injectedService: UserServiceBase;
+
+  constructor(@Inject injectedService: UserServiceBase) {
+    this.injectedService = injectedService;
+  }
   @POST
-  private async createNewUser(user: UserType): Promise<string> {
-    try {
-      await User.create(user);
-      return "User created";
-    } catch (error) {
-      return error;
-    }
+  private createNewUser(user: UserType): Promise<string> {
+    return this.injectedService.createNewUser(user);
   }
 
   @GET
   @Path(":id")
-  private async getUserByid(@PathParam("id") id: string): Promise<UserType> {
-    try {
-      return await User.findById(id);
-    } catch (error) {
-      return error;
-    }
+  private getUserByid(@PathParam("id") id: string): Promise<UserType> {
+    return this.injectedService.getUserByid(id);
   }
 
   @GET
-  private async getAllUsers(): Promise<Array<UserType>> {
-    try {
-      return await User.find({});
-    } catch (error) {
-      return error;
-    }
+  private getAllUsers(): Promise<Array<UserType>> {
+    return this.injectedService.getAllUsers();
   }
 
   @PATCH
   @Path(":id/messages")
-  private async sendMessagesToUsers(
+  private sendMessagesToUsers(
     @PathParam("id") id: string,
     message: MessageType
   ): Promise<string> {
-    try {
-      message.sendBy = id;
-      message.roomId = (id + message.receiveBy).split("").sort().join("");
-      //message.roomId = [message.receiveBy, message.sendBy].sort().join("");
-      await Message.create(message);
-      return "Message send successfully!";
-    } catch (error) {
-      return error;
-    }
+    return this.injectedService.sendMessagesToUsers(id, message);
   }
 
   @GET
   @Path(":id/messages")
-  private async getAllMessagesOfUser(
+  private getAllMessagesOfUser(
     @PathParam("id") id: string
   ): Promise<Array<MessageType>> {
-    try {
-      return await Message.aggregate([
-        {
-          $match: {
-            $or: [
-              { sendBy: mongoose.Types.ObjectId(id) },
-              { receiveBy: mongoose.Types.ObjectId(id) },
-            ],
-          },
-        },
-        {
-          $project: {
-            _id: 0,
-            text: 1,
-            sendBy: 1,
-            receiveBy: 1,
-            createdAt: 1,
-            roomId: 1,
-          },
-        },
-        { $sort: { createdAt: -1 } },
-        {
-          $group: {
-            _id: "$roomId",
-            text: { $first: "$text" },
-            sendBy: { $first: "$sendBy" },
-            receiveBy: { $first: "$receiveBy" },
-            createdAt: { $first: "$createdAt" },
-          },
-        },
-        { $sort: { createdAt: -1 } },
-      ]);
-    } catch (error) {
-      return error;
-    }
+    return this.injectedService.getAllMessagesOfUser(id);
   }
 }
