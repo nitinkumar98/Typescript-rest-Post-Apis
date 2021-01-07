@@ -12,8 +12,8 @@ export class AwsS3Controller {
     //@FormParam("postedBy") postedBy: String
   ): Promise<string> {
     const s3 = new AWS.S3({
-      accessKeyId: "AKIAJ3II6QQSAG7FUBQQ",
-      secretAccessKey: "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",
+      accessKeyId: "",
+      secretAccessKey: "",
     });
     const bucketParam = {
       Bucket: "dev-data-bi",
