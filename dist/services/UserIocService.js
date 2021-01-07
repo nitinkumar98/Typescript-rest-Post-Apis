@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserServiceBaseImp = exports.UserServiceBase = void 0;
+exports.UserServiceBase = void 0;
 const typescript_ioc_1 = require("typescript-ioc");
 const mongoose_1 = __importDefault(require("mongoose"));
 const UserModel_1 = __importDefault(require("../models/UserModel"));
@@ -107,5 +107,4 @@ class UserServiceBaseImp {
         });
     }
 }
-exports.UserServiceBaseImp = UserServiceBaseImp;
 typescript_ioc_1.Container.bind(UserServiceBase).to(UserServiceBaseImp);

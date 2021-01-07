@@ -10,13 +10,3 @@ export declare abstract class PostServiceBase {
     abstract toGetAllCommentsOnPost(id: string): Promise<Array<CommentType>>;
     abstract toLikePost(id: string, user: LoginUser): Promise<string>;
 }
-export declare class PostServiceBaseImp implements PostServiceBase {
-    createNewPost(post: PostType): Promise<String>;
-    getPostById(id: string): Promise<PostType>;
-    getAllPosts(): Promise<Array<PostType>>;
-    updatePostById(id: string, postData: PostType): Promise<string>;
-    deletePostById(id: string): Promise<string>;
-    toCommentsOnPost(id: string, commentData: CommentType): Promise<string>;
-    toGetAllCommentsOnPost(id: string): Promise<Array<CommentType>>;
-    toLikePost(id: string, user: LoginUser): Promise<string>;
-}

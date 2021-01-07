@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PostServiceBaseImp = exports.PostServiceBase = void 0;
+exports.PostServiceBase = void 0;
 const typescript_ioc_1 = require("typescript-ioc");
 const PostModel_1 = __importDefault(require("../models/PostModel"));
 const CommentModel_1 = __importDefault(require("../models/CommentModel"));
@@ -120,5 +120,4 @@ class PostServiceBaseImp {
         });
     }
 }
-exports.PostServiceBaseImp = PostServiceBaseImp;
 typescript_ioc_1.Container.bind(PostServiceBase).to(PostServiceBaseImp);

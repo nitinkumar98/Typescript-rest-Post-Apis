@@ -3,7 +3,7 @@ import { Inject } from "typescript-ioc";
 
 import { PostType, LoginUser } from "../models/PostModel";
 import { CommentType } from "../models/CommentModel";
-import { PostServiceBase } from "../services/PostIocServices";
+import { PostServiceBase } from "../services/index";
 
 @Path("/posts")
 export class PostRoutesController {

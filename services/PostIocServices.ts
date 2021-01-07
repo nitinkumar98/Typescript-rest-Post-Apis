@@ -22,7 +22,7 @@ export abstract class PostServiceBase {
   public abstract toLikePost(id: string, user: LoginUser): Promise<string>;
 }
 
-export class PostServiceBaseImp implements PostServiceBase {
+class PostServiceBaseImp implements PostServiceBase {
   public async createNewPost(post: PostType): Promise<String> {
     try {
       await Post.create(post);

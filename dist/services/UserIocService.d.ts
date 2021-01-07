@@ -7,10 +7,3 @@ export declare abstract class UserServiceBase {
     abstract sendMessagesToUsers(id: string, message: MessageType): Promise<string>;
     abstract getAllMessagesOfUser(id: string): Promise<Array<MessageType>>;
 }
-export declare class UserServiceBaseImp implements UserServiceBase {
-    createNewUser(user: UserType): Promise<string>;
-    getUserByid(id: string): Promise<UserType>;
-    getAllUsers(): Promise<Array<UserType>>;
-    sendMessagesToUsers(id: string, message: MessageType): Promise<string>;
-    getAllMessagesOfUser(id: string): Promise<Array<MessageType>>;
-}

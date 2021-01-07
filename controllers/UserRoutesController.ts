@@ -3,7 +3,7 @@ import { Inject } from "typescript-ioc";
 
 import { UserType } from "../models/UserModel";
 import { MessageType } from "../models/MessageModel";
-import { UserServiceBase } from "../services/UserIocService";
+import { UserServiceBase } from "../services/index";
 
 @Path("/users")
 export class UserRoutesController {

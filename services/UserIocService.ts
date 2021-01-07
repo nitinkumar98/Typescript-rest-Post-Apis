@@ -14,7 +14,7 @@ export abstract class UserServiceBase {
   public abstract getAllMessagesOfUser(id: string): Promise<Array<MessageType>>;
 }
 
-export class UserServiceBaseImp implements UserServiceBase {
+class UserServiceBaseImp implements UserServiceBase {
   public async createNewUser(user: UserType): Promise<string> {
     try {
       await User.create(user);
