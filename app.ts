@@ -2,10 +2,11 @@ import express from "express";
 import { Server } from "typescript-rest";
 import mongoose from "mongoose";
 import Routes from "./controllers/index";
-
+import bodyParser from "body-parser";
 const url: string = "mongodb://localhost/tposts";
 
 let app: express.Application = express();
+app.use(bodyParser.urlencoded({ extended: true }));
 Server.buildServices(app, ...Routes);
 
 app.listen(8080, () => {
