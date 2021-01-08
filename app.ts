@@ -6,7 +6,6 @@ import Routes from "./controllers/index";
 import bodyParser from "body-parser";
 import { MongooseConnector } from "./mongoose.connector";
 
-
 dotenv.config();
 
 let app: express.Application = express();
