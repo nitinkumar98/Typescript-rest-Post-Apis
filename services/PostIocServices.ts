@@ -23,7 +23,7 @@ export abstract class PostServiceBase {
 }
 
 class PostServiceBaseImp implements PostServiceBase {
-  public async createNewPost(post: PostType): Promise<String> {
+  public async createNewPost(post: PostType): Promise<string> {
     try {
       await Post.create(post);
       return "Post created";

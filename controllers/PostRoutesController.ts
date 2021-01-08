@@ -11,7 +11,7 @@ export class PostRoutesController {
   private injectedService: PostServiceBase;
 
   @POST
-  private async createNewPost(post: PostType): Promise<String> {
+  private createNewPost(post: PostType): Promise<String> {
     return this.injectedService.createNewPost(post);
   }
 
