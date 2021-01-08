@@ -8,7 +8,7 @@ export interface MessageType extends Document {
   roomId: string;
 }
 
-const messageSchema = new Schema(
+const messageSchema: Schema = new Schema(
   {
     text: String,
     sendBy: {

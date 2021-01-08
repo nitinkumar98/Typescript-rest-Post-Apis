@@ -13,7 +13,7 @@ export interface LoginUser {
   likedBy: UserType["_id"];
 }
 
-const postSchema = new Schema(
+const postSchema: Schema = new Schema(
   {
     name: String,
     image: String,

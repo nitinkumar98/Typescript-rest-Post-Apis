@@ -8,7 +8,7 @@ export interface CommentType extends Document {
   onPost: PostType["_id"];
 }
 
-const commentSchema = new Schema(
+const commentSchema: Schema = new Schema(
   {
     text: String,
     commentedBy: {
