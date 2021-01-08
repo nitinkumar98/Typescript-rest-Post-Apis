@@ -1,4 +1,4 @@
-import mongoose, { Document } from "mongoose";
+import { Document, Schema, model } from "mongoose";
 import { UserType } from "./UserModel";
 import { PostType } from "./PostModel";
 
@@ -8,18 +8,18 @@ export interface CommentType extends Document {
   onPost: PostType["_id"];
 }
 
-const commentSchema = new mongoose.Schema(
+const commentSchema = new Schema(
   {
     text: String,
     commentedBy: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
     },
     onPost: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       index: true,
     },
   },
   { timestamps: true }
 );
 
-export default mongoose.model<CommentType>("Comment", commentSchema);
+export default model<CommentType>("Comment", commentSchema);

@@ -1,4 +1,4 @@
-import mongoose, { Document } from "mongoose";
+import { Document, Schema, model } from "mongoose";
 import { UserType } from "./UserModel";
 
 export interface MessageType extends Document {
@@ -8,15 +8,15 @@ export interface MessageType extends Document {
   roomId: string;
 }
 
-const messageSchema = new mongoose.Schema(
+const messageSchema = new Schema(
   {
     text: String,
     sendBy: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       index: true,
     },
     receiveBy: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       index: true,
     },
     roomId: String,
@@ -24,4 +24,4 @@ const messageSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export default mongoose.model<MessageType>("Message", messageSchema);
+export default model<MessageType>("Message", messageSchema);
