@@ -11,18 +11,18 @@ export class UserRoutesController {
   private injectedService: UserServiceBase;
 
   @POST
-  private createNewUser(user: UserType): Promise<string> {
+  private createNewUser(user: UserType): Object {
     return this.injectedService.createNewUser(user);
   }
 
   @GET
   @Path(":id")
-  private getUserByid(@PathParam("id") id: string): Promise<UserType> {
+  private getUserByid(@PathParam("id") id: string): Promise<Object> {
     return this.injectedService.getUserByid(id);
   }
 
   @GET
-  private getAllUsers(): Promise<Array<UserType>> {
+  private getAllUsers(): Promise<Object> {
     return this.injectedService.getAllUsers();
   }
 
@@ -31,15 +31,13 @@ export class UserRoutesController {
   private sendMessagesToUsers(
     @PathParam("id") id: string,
     message: MessageType
-  ): Promise<string> {
+  ): Object {
     return this.injectedService.sendMessagesToUsers(id, message);
   }
 
   @GET
   @Path(":id/messages")
-  private getAllMessagesOfUser(
-    @PathParam("id") id: string
-  ): Promise<Array<MessageType>> {
+  private getAllMessagesOfUser(@PathParam("id") id: string): Promise<Object> {
     return this.injectedService.getAllMessagesOfUser(id);
   }
 }

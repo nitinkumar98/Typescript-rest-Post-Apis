@@ -1,7 +1,8 @@
-export class CheckForImageFileValidation {
-  public static isFileValid(fileExt: string): Boolean {
-    const allowedExtensions: string[] = ["jpeg", "jpg", "png", "gif"];
-
+export class CheckForFileExtensionValidation {
+  public static isFileValid(
+    fileExt: string,
+    allowedExtensions: string[]
+  ): Boolean {
     let i: number;
     let isValid = false;
 

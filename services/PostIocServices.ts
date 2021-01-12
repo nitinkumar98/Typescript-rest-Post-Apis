@@ -4,29 +4,29 @@ import Post, { PostType, LoginUser } from "../models/PostModel";
 import Comment, { CommentType } from "../models/CommentModel";
 
 export abstract class PostServiceBase {
-  public abstract createNewPost(post: PostType): Promise<String>;
+  public abstract createNewPost(post: PostType): Promise<Object>;
   public abstract getPostById(id: string): Promise<PostType>;
   public abstract getAllPosts(): Promise<Array<PostType>>;
   public abstract updatePostById(
     id: string,
     postData: PostType
-  ): Promise<string>;
-  public abstract deletePostById(id: string): Promise<string>;
+  ): Promise<Object>;
+  public abstract deletePostById(id: string): Promise<Object>;
   public abstract toCommentsOnPost(
     id: string,
     commentData: CommentType
-  ): Promise<string>;
+  ): Promise<Object>;
   public abstract toGetAllCommentsOnPost(
     id: string
   ): Promise<Array<CommentType>>;
-  public abstract toLikePost(id: string, user: LoginUser): Promise<string>;
+  public abstract toLikePost(id: string, user: LoginUser): Promise<Object>;
 }
 
 class PostServiceBaseImp implements PostServiceBase {
-  public async createNewPost(post: PostType): Promise<string> {
+  public async createNewPost(post: PostType): Promise<Object> {
     try {
       await Post.create(post);
-      return "Post created";
+      return { message: "Post created" };
     } catch (error) {
       return error;
     }
@@ -48,19 +48,19 @@ class PostServiceBaseImp implements PostServiceBase {
     }
   }
 
-  public async updatePostById(id: string, postData: PostType): Promise<string> {
+  public async updatePostById(id: string, postData: PostType): Promise<Object> {
     try {
       await Post.findByIdAndUpdate(id, postData);
-      return "post updated";
+      return { message: "post updated" };
     } catch (error) {
       return error;
     }
   }
 
-  public async deletePostById(id: string): Promise<string> {
+  public async deletePostById(id: string): Promise<Object> {
     try {
       await Post.findByIdAndDelete(id);
-      return "Post deleted successfully!";
+      return { message: "Post deleted successfully!" };
     } catch (error) {
       return error;
     }
@@ -69,11 +69,11 @@ class PostServiceBaseImp implements PostServiceBase {
   public async toCommentsOnPost(
     id: string,
     commentData: CommentType
-  ): Promise<string> {
+  ): Promise<Object> {
     try {
       commentData.onPost = id;
       await Comment.create(commentData);
-      return "Comment created successfully!!";
+      return { message: "Comment created successfully!!" };
     } catch (error) {
       return error;
     }
@@ -87,7 +87,7 @@ class PostServiceBaseImp implements PostServiceBase {
     }
   }
 
-  public async toLikePost(id: string, user: LoginUser): Promise<string> {
+  public async toLikePost(id: string, user: LoginUser): Promise<Object> {
     try {
       const userId = user.likedBy;
       await Post.findByIdAndUpdate(
@@ -107,7 +107,7 @@ class PostServiceBaseImp implements PostServiceBase {
         },
         { new: true }
       );
-      return "Someone liked the post";
+      return { message: "Someone liked the post" };
     } catch (error) {
       return error;
     }

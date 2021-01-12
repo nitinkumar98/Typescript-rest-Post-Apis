@@ -4,21 +4,21 @@ import User, { UserType } from "../models/UserModel";
 import Message, { MessageType } from "../models/MessageModel";
 
 export abstract class UserServiceBase {
-  public abstract createNewUser(user: UserType): Promise<string>;
+  public abstract createNewUser(user: UserType): Object;
   public abstract getUserByid(id: string): Promise<UserType>;
   public abstract getAllUsers(): Promise<Array<UserType>>;
   public abstract sendMessagesToUsers(
     id: string,
     message: MessageType
-  ): Promise<string>;
+  ): Promise<Object>;
   public abstract getAllMessagesOfUser(id: string): Promise<Array<MessageType>>;
 }
 
 class UserServiceBaseImp implements UserServiceBase {
-  public async createNewUser(user: UserType): Promise<string> {
+  public async createNewUser(user: UserType): Promise<Object> {
     try {
       await User.create(user);
-      return "User created";
+      return { message: "User created" };
     } catch (error) {
       return error;
     }
@@ -43,13 +43,13 @@ class UserServiceBaseImp implements UserServiceBase {
   public async sendMessagesToUsers(
     id: string,
     message: MessageType
-  ): Promise<string> {
+  ): Promise<Object> {
     try {
       message.sendBy = id;
       message.roomId = (id + message.receiveBy).split("").sort().join("");
-      //message.roomId = [message.receiveBy, message.sendBy].sort().join("");
+
       await Message.create(message);
-      return "Message send successfully!";
+      return { message: "Message send successfully!" };
     } catch (error) {
       return error;
     }

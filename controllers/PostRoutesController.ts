@@ -11,13 +11,13 @@ export class PostRoutesController {
   private injectedService: PostServiceBase;
 
   @POST
-  private createNewPost(post: PostType): Promise<String> {
+  private createNewPost(post: PostType): Object {
     return this.injectedService.createNewPost(post);
   }
 
   @GET
   @Path(":id")
-  private getPostById(@PathParam("id") id: string): Promise<PostType> {
+  private getPostById(@PathParam("id") id: string): Promise<Object> {
     return this.injectedService.getPostById(id);
   }
 
@@ -31,13 +31,13 @@ export class PostRoutesController {
   private updatePostById(
     @PathParam("id") id: string,
     postData: PostType
-  ): Promise<string> {
+  ): Promise<Object> {
     return this.injectedService.updatePostById(id, postData);
   }
 
   @DELETE
   @Path(":id")
-  private deletePostById(@PathParam("id") id: string): Promise<string> {
+  private deletePostById(@PathParam("id") id: string): Promise<Object> {
     return this.injectedService.deletePostById(id);
   }
 
@@ -46,7 +46,7 @@ export class PostRoutesController {
   private toCommentsOnPost(
     @PathParam("id") id: string,
     commentData: CommentType
-  ): Promise<string> {
+  ): Promise<Object> {
     return this.injectedService.toCommentsOnPost(id, commentData);
   }
 
@@ -63,7 +63,7 @@ export class PostRoutesController {
   private toLikePost(
     @PathParam("id") id: string,
     user: LoginUser
-  ): Promise<string> {
+  ): Promise<Object> {
     return this.injectedService.toLikePost(id, user);
   }
 }
