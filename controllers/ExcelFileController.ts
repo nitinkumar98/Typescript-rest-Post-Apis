@@ -1,16 +1,16 @@
-import { POST, Path, FileParam } from "typescript-rest";
-import { Inject } from "typescript-ioc";
-import { PersonDetailsServiceBase } from "../services/index";
+import { POST, Path, FileParam } from 'typescript-rest';
+import { Inject } from 'typescript-ioc';
+import { PersonDetailsServiceBase } from '../services/index';
 
-@Path("/excel")
+@Path('/excel')
 export class ExcelFileController {
   @Inject
   private injectedService: PersonDetailsServiceBase;
 
   @POST
-  @Path("upload")
+  @Path('upload')
   private uploadExcelFileAndSaveToDb(
-    @FileParam("file") file: Express.Multer.File
+    @FileParam('file') file: Express.Multer.File
   ): Object {
     return this.injectedService.uploadExcelFileAndSaveToDb(file);
   }

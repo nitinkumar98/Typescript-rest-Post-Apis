@@ -1,7 +1,7 @@
-import AWS from "aws-sdk";
-import { Container } from "typescript-ioc";
+import AWS from 'aws-sdk';
+import { Container } from 'typescript-ioc';
 
-import { CheckForFileExtensionValidation } from "../validation/ExtensionValidate";
+import { CheckForFileExtensionValidation } from '../validation/ExtensionValidate';
 
 export abstract class AwsServiceBase {
   public abstract uploadFileToAws(image: Express.Multer.File): Promise<Object>;
@@ -10,11 +10,11 @@ export abstract class AwsServiceBase {
 export class AwsServiceBaseImp implements AwsServiceBase {
   public async uploadFileToAws(image: Express.Multer.File): Promise<Object> {
     if (!image.buffer.length) {
-      return { error: "Upload another image!!" };
+      return { error: 'Upload another image!!' };
     }
 
-    const fileName: string[] = image.originalname.split(".");
-    const allowedExtensions: string[] = ["jpeg", "jpg", "png", "gif"];
+    const fileName: string[] = image.originalname.split('.');
+    const allowedExtensions: string[] = ['jpeg', 'jpg', 'png', 'gif'];
 
     if (
       !CheckForFileExtensionValidation.isFileValid(
@@ -22,20 +22,20 @@ export class AwsServiceBaseImp implements AwsServiceBase {
         allowedExtensions
       )
     ) {
-      return { error: "Sorry Upload file format is not supported" };
+      return { error: 'Sorry Upload file format is not supported' };
     }
     const s3: AWS.S3 = new AWS.S3({
-      accessKeyId: "#",
-      secretAccessKey: "#",
+      accessKeyId: '#',
+      secretAccessKey: '#',
     });
     const bucketParam = {
-      Bucket: "#",
+      Bucket: '#',
       Key: image.originalname,
       Body: image.buffer,
     };
     try {
       s3.upload(bucketParam);
-      return { message: "Uploaded successfully" };
+      return { message: 'Uploaded successfully' };
     } catch (error) {
       return error;
     }

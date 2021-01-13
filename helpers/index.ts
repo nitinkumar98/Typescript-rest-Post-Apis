@@ -1,4 +1,4 @@
-import { ExcelToJsonHelperClass } from "./ExeclToJsonHelper";
-import { JsonDataValidateHelper } from "./JsonDataValidateHelper";
+import { ExcelToJsonHelperClass } from './ExeclToJsonHelper';
+import { JsonDataValidateHelper } from './JsonDataValidateHelper';
 
 export { ExcelToJsonHelperClass, JsonDataValidateHelper };

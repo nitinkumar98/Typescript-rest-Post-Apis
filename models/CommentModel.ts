@@ -1,11 +1,11 @@
-import { Document, Schema, model } from "mongoose";
-import { UserType } from "./UserModel";
-import { PostType } from "./PostModel";
+import { Document, Schema, model } from 'mongoose';
+import { UserType } from './UserModel';
+import { PostType } from './PostModel';
 
 export interface CommentType extends Document {
   text: string;
-  commentedBy: UserType["_id"];
-  onPost: PostType["_id"];
+  commentedBy: UserType['_id'];
+  onPost: PostType['_id'];
 }
 
 const commentSchema: Schema = new Schema(
@@ -22,4 +22,4 @@ const commentSchema: Schema = new Schema(
   { timestamps: true }
 );
 
-export default model<CommentType>("Comment", commentSchema);
+export default model<CommentType>('Comment', commentSchema);

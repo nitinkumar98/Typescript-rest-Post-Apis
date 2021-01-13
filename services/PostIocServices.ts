@@ -1,7 +1,7 @@
-import { Container } from "typescript-ioc";
+import { Container } from 'typescript-ioc';
 
-import Post, { PostType, LoginUser } from "../models/PostModel";
-import Comment, { CommentType } from "../models/CommentModel";
+import Post, { PostType, LoginUser } from '../models/PostModel';
+import Comment, { CommentType } from '../models/CommentModel';
 
 export abstract class PostServiceBase {
   public abstract createNewPost(post: PostType): Promise<Object>;
@@ -26,7 +26,7 @@ class PostServiceBaseImp implements PostServiceBase {
   public async createNewPost(post: PostType): Promise<Object> {
     try {
       await Post.create(post);
-      return { message: "Post created" };
+      return { message: 'Post created' };
     } catch (error) {
       return error;
     }
@@ -51,7 +51,7 @@ class PostServiceBaseImp implements PostServiceBase {
   public async updatePostById(id: string, postData: PostType): Promise<Object> {
     try {
       await Post.findByIdAndUpdate(id, postData);
-      return { message: "post updated" };
+      return { message: 'post updated' };
     } catch (error) {
       return error;
     }
@@ -60,7 +60,7 @@ class PostServiceBaseImp implements PostServiceBase {
   public async deletePostById(id: string): Promise<Object> {
     try {
       await Post.findByIdAndDelete(id);
-      return { message: "Post deleted successfully!" };
+      return { message: 'Post deleted successfully!' };
     } catch (error) {
       return error;
     }
@@ -73,7 +73,7 @@ class PostServiceBaseImp implements PostServiceBase {
     try {
       commentData.onPost = id;
       await Comment.create(commentData);
-      return { message: "Comment created successfully!!" };
+      return { message: 'Comment created successfully!!' };
     } catch (error) {
       return error;
     }
@@ -81,7 +81,7 @@ class PostServiceBaseImp implements PostServiceBase {
 
   public async toGetAllCommentsOnPost(id: string): Promise<Array<CommentType>> {
     try {
-      return await Comment.find({ onPost: id }).populate("commentedBy");
+      return await Comment.find({ onPost: id }).populate('commentedBy');
     } catch (error) {
       return error;
     }
@@ -107,7 +107,7 @@ class PostServiceBaseImp implements PostServiceBase {
         },
         { new: true }
       );
-      return { message: "Someone liked the post" };
+      return { message: 'Someone liked the post' };
     } catch (error) {
       return error;
     }

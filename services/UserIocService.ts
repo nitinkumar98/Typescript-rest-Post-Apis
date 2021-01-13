@@ -1,7 +1,7 @@
-import { Container } from "typescript-ioc";
-import mongoose from "mongoose";
-import User, { UserType } from "../models/UserModel";
-import Message, { MessageType } from "../models/MessageModel";
+import { Container } from 'typescript-ioc';
+import mongoose from 'mongoose';
+import User, { UserType } from '../models/UserModel';
+import Message, { MessageType } from '../models/MessageModel';
 
 export abstract class UserServiceBase {
   public abstract createNewUser(user: UserType): Object;
@@ -18,7 +18,7 @@ class UserServiceBaseImp implements UserServiceBase {
   public async createNewUser(user: UserType): Promise<Object> {
     try {
       await User.create(user);
-      return { message: "User created" };
+      return { message: 'User created' };
     } catch (error) {
       return error;
     }
@@ -46,10 +46,10 @@ class UserServiceBaseImp implements UserServiceBase {
   ): Promise<Object> {
     try {
       message.sendBy = id;
-      message.roomId = (id + message.receiveBy).split("").sort().join("");
+      message.roomId = (id + message.receiveBy).split('').sort().join('');
 
       await Message.create(message);
-      return { message: "Message send successfully!" };
+      return { message: 'Message send successfully!' };
     } catch (error) {
       return error;
     }
@@ -79,11 +79,11 @@ class UserServiceBaseImp implements UserServiceBase {
         { $sort: { createdAt: -1 } },
         {
           $group: {
-            _id: "$roomId",
-            text: { $first: "$text" },
-            sendBy: { $first: "$sendBy" },
-            receiveBy: { $first: "$receiveBy" },
-            createdAt: { $first: "$createdAt" },
+            _id: '$roomId',
+            text: { $first: '$text' },
+            sendBy: { $first: '$sendBy' },
+            receiveBy: { $first: '$receiveBy' },
+            createdAt: { $first: '$createdAt' },
           },
         },
         { $sort: { createdAt: -1 } },

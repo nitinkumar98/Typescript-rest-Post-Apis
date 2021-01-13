@@ -1,6 +1,6 @@
-import joi, { array } from "joi";
+import joi, { array } from 'joi';
 
-import { PersonDetailsType } from "../models/index";
+import { PersonDetailsType } from '../models/index';
 
 export class JsonDataValidateHelper {
   public static jsonDataValidate(

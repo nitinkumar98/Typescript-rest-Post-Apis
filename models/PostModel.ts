@@ -1,16 +1,16 @@
-import { Document, Schema, model } from "mongoose";
-import { UserType } from "./UserModel";
+import { Document, Schema, model } from 'mongoose';
+import { UserType } from './UserModel';
 
 export interface PostType extends Document {
   name: string;
   image: string;
   description: string;
-  postedBy: UserType["_id"];
+  postedBy: UserType['_id'];
   likes: number;
-  likes_by: [UserType["_id"]];
+  likes_by: [UserType['_id']];
 }
 export interface LoginUser {
-  likedBy: UserType["_id"];
+  likedBy: UserType['_id'];
 }
 
 const postSchema: Schema = new Schema(
@@ -27,4 +27,4 @@ const postSchema: Schema = new Schema(
   { timestamps: true }
 );
 
-export default model<PostType>("Post", postSchema);
+export default model<PostType>('Post', postSchema);

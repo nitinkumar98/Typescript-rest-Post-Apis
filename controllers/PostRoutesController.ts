@@ -1,11 +1,11 @@
-import { Path, GET, POST, PathParam, PATCH, DELETE } from "typescript-rest";
-import { Inject } from "typescript-ioc";
+import { Path, GET, POST, PathParam, PATCH, DELETE } from 'typescript-rest';
+import { Inject } from 'typescript-ioc';
 
-import { PostType, LoginUser } from "../models/PostModel";
-import { CommentType } from "../models/CommentModel";
-import { PostServiceBase } from "../services/index";
+import { PostType, LoginUser } from '../models/PostModel';
+import { CommentType } from '../models/CommentModel';
+import { PostServiceBase } from '../services/index';
 
-@Path("/posts")
+@Path('/posts')
 export class PostRoutesController {
   @Inject
   private injectedService: PostServiceBase;
@@ -16,8 +16,8 @@ export class PostRoutesController {
   }
 
   @GET
-  @Path(":id")
-  private getPostById(@PathParam("id") id: string): Promise<Object> {
+  @Path(':id')
+  private getPostById(@PathParam('id') id: string): Promise<Object> {
     return this.injectedService.getPostById(id);
   }
 
@@ -27,41 +27,41 @@ export class PostRoutesController {
   }
 
   @PATCH
-  @Path(":id")
+  @Path(':id')
   private updatePostById(
-    @PathParam("id") id: string,
+    @PathParam('id') id: string,
     postData: PostType
   ): Promise<Object> {
     return this.injectedService.updatePostById(id, postData);
   }
 
   @DELETE
-  @Path(":id")
-  private deletePostById(@PathParam("id") id: string): Promise<Object> {
+  @Path(':id')
+  private deletePostById(@PathParam('id') id: string): Promise<Object> {
     return this.injectedService.deletePostById(id);
   }
 
   @POST
-  @Path(":id/comments")
+  @Path(':id/comments')
   private toCommentsOnPost(
-    @PathParam("id") id: string,
+    @PathParam('id') id: string,
     commentData: CommentType
   ): Promise<Object> {
     return this.injectedService.toCommentsOnPost(id, commentData);
   }
 
   @GET
-  @Path(":id/comments")
+  @Path(':id/comments')
   private toGetAllCommentsOnPost(
-    @PathParam("id") id: string
+    @PathParam('id') id: string
   ): Promise<Array<CommentType>> {
     return this.injectedService.toGetAllCommentsOnPost(id);
   }
 
   @POST
-  @Path(":id/likes")
+  @Path(':id/likes')
   private toLikePost(
-    @PathParam("id") id: string,
+    @PathParam('id') id: string,
     user: LoginUser
   ): Promise<Object> {
     return this.injectedService.toLikePost(id, user);

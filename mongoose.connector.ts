@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 export class MongooseConnector {
   public static mongoConnection(): void {
@@ -9,7 +9,7 @@ export class MongooseConnector {
         useFindAndModify: false,
         useCreateIndex: true,
       });
-      console.log("Database Connected");
+      console.log('Database Connected');
     } catch (error) {
       console.log(error);
     }

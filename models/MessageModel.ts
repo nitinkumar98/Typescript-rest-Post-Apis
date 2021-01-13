@@ -1,10 +1,10 @@
-import { Document, Schema, model } from "mongoose";
-import { UserType } from "./UserModel";
+import { Document, Schema, model } from 'mongoose';
+import { UserType } from './UserModel';
 
 export interface MessageType extends Document {
   text: string;
-  sendBy: UserType["_id"];
-  receiveBy: UserType["_id"];
+  sendBy: UserType['_id'];
+  receiveBy: UserType['_id'];
   roomId: string;
 }
 
@@ -24,4 +24,4 @@ const messageSchema: Schema = new Schema(
   { timestamps: true }
 );
 
-export default model<MessageType>("Message", messageSchema);
+export default model<MessageType>('Message', messageSchema);

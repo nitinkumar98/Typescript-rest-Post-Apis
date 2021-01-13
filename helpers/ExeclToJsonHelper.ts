@@ -1,6 +1,6 @@
-import excelToJson from "convert-excel-to-json";
+import excelToJson from 'convert-excel-to-json';
 
-import { PersonDetailsType } from "../models/index";
+import { PersonDetailsType } from '../models/index';
 
 export class ExcelToJsonHelperClass {
   public static ExeclToJson(
@@ -13,7 +13,7 @@ export class ExcelToJsonHelperClass {
           rows: 1,
         },
         columnToKey: {
-          "*": "{{columnHeader}}",
+          '*': '{{columnHeader}}',
         },
       }).Sheet1;
     } catch (error) {

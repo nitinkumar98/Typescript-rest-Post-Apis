@@ -1,11 +1,11 @@
-import { Path, GET, PathParam, POST, PATCH } from "typescript-rest";
-import { Inject } from "typescript-ioc";
+import { Path, GET, PathParam, POST, PATCH } from 'typescript-rest';
+import { Inject } from 'typescript-ioc';
 
-import { UserType } from "../models/UserModel";
-import { MessageType } from "../models/MessageModel";
-import { UserServiceBase } from "../services/index";
+import { UserType } from '../models/UserModel';
+import { MessageType } from '../models/MessageModel';
+import { UserServiceBase } from '../services/index';
 
-@Path("/users")
+@Path('/users')
 export class UserRoutesController {
   @Inject
   private injectedService: UserServiceBase;
@@ -16,8 +16,8 @@ export class UserRoutesController {
   }
 
   @GET
-  @Path(":id")
-  private getUserByid(@PathParam("id") id: string): Promise<Object> {
+  @Path(':id')
+  private getUserByid(@PathParam('id') id: string): Promise<Object> {
     return this.injectedService.getUserByid(id);
   }
 
@@ -27,17 +27,17 @@ export class UserRoutesController {
   }
 
   @PATCH
-  @Path(":id/messages")
+  @Path(':id/messages')
   private sendMessagesToUsers(
-    @PathParam("id") id: string,
+    @PathParam('id') id: string,
     message: MessageType
   ): Object {
     return this.injectedService.sendMessagesToUsers(id, message);
   }
 
   @GET
-  @Path(":id/messages")
-  private getAllMessagesOfUser(@PathParam("id") id: string): Promise<Object> {
+  @Path(':id/messages')
+  private getAllMessagesOfUser(@PathParam('id') id: string): Promise<Object> {
     return this.injectedService.getAllMessagesOfUser(id);
   }
 }
