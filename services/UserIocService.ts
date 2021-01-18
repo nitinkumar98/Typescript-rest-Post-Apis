@@ -1,20 +1,18 @@
 import { Container } from 'typescript-ioc';
 import mongoose from 'mongoose';
-import User, { UserType } from '../models/UserModel';
-import Message, { MessageType } from '../models/MessageModel';
 
-export abstract class UserServiceBase {
-  public abstract createNewUser(user: UserType): Object;
-  public abstract getUserByid(id: string): Promise<UserType>;
-  public abstract getAllUsers(): Promise<Array<UserType>>;
-  public abstract sendMessagesToUsers(
-    id: string,
-    message: MessageType
-  ): Promise<Object>;
-  public abstract getAllMessagesOfUser(id: string): Promise<Array<MessageType>>;
-}
+import { User, UserType, Message, MessageType } from '../models';
+import { UserServiceBase } from './interfaces';
 
-class UserServiceBaseImp implements UserServiceBase {
+/**
+ * implementation of all user operations
+ */
+
+export class UserServiceBaseImp implements UserServiceBase {
+  /**
+   * create new user
+   * @returns Promise of object
+   */
   public async createNewUser(user: UserType): Promise<Object> {
     try {
       await User.create(user);
@@ -24,6 +22,10 @@ class UserServiceBaseImp implements UserServiceBase {
     }
   }
 
+  /**
+   * get user by id
+   * @returns Promise of user model
+   */
   public async getUserByid(id: string): Promise<UserType> {
     try {
       return await User.findById(id);
@@ -32,6 +34,10 @@ class UserServiceBaseImp implements UserServiceBase {
     }
   }
 
+  /**
+   * get all user
+   * @returns Promise of array of user model
+   */
   public async getAllUsers(): Promise<Array<UserType>> {
     try {
       return await User.find({});
@@ -40,6 +46,10 @@ class UserServiceBaseImp implements UserServiceBase {
     }
   }
 
+  /**
+   * send message to different users
+   * @returns Promise of object
+   */
   public async sendMessagesToUsers(
     id: string,
     message: MessageType
@@ -55,6 +65,10 @@ class UserServiceBaseImp implements UserServiceBase {
     }
   }
 
+  /**
+   * get all messages of a user(Only the last sending or receiving messages from all the users)
+   * @returns Promise of array of message model
+   */
   public async getAllMessagesOfUser(id: string): Promise<Array<MessageType>> {
     try {
       return await Message.aggregate([

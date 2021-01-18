@@ -1,18 +1,9 @@
-import Comment, { CommentType } from './CommentModel';
-import Post, { PostType } from './PostModel';
-import User, { UserType } from './UserModel';
-import Message, { MessageType } from './MessageModel';
-import PersonDetail, { PersonDetailsType } from './PersonDetailsModel';
+// Exports all the interfaces
+export * from './interfaces';
 
-export {
-  Comment,
-  CommentType,
-  Post,
-  PostType,
-  User,
-  UserType,
-  Message,
-  MessageType,
-  PersonDetail,
-  PersonDetailsType,
-};
+// Exports all the models
+export * from './CommentModel';
+export * from './PersonDetailsModel';
+export * from './PostModel';
+export * from './UserModel';
+export * from './MessageModel';

@@ -2,10 +2,7 @@ import AWS from 'aws-sdk';
 import { Container } from 'typescript-ioc';
 
 import { CheckForFileExtensionValidation } from '../validation/ExtensionValidate';
-
-export abstract class AwsServiceBase {
-  public abstract uploadFileToAws(image: Express.Multer.File): Promise<Object>;
-}
+import { AwsServiceBase } from './interfaces';
 
 export class AwsServiceBaseImp implements AwsServiceBase {
   public async uploadFileToAws(image: Express.Multer.File): Promise<Object> {

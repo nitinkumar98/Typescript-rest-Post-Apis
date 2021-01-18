@@ -1,7 +1,7 @@
 import { POST, Path, FileParam } from 'typescript-rest';
 import { Inject } from 'typescript-ioc';
 
-import { AwsServiceBase } from '../services/index';
+import { AwsServiceBase } from '../services';
 
 @Path('/posts')
 export class AwsS3Controller {

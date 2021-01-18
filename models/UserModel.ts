@@ -1,8 +1,5 @@
-import { Document, model, Schema } from 'mongoose';
-
-export interface UserType extends Document {
-  name: string;
-}
+import { model, Schema } from 'mongoose';
+import { UserType } from './interfaces';
 
 const userSchema: Schema = new Schema({
   name: {
@@ -11,4 +8,5 @@ const userSchema: Schema = new Schema({
   },
 });
 
-export default model<UserType>('User', userSchema);
+const User = model<UserType>('User', userSchema);
+export { User };

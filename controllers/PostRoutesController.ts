@@ -1,9 +1,8 @@
 import { Path, GET, POST, PathParam, PATCH, DELETE } from 'typescript-rest';
 import { Inject } from 'typescript-ioc';
 
-import { PostType, LoginUser } from '../models/PostModel';
-import { CommentType } from '../models/CommentModel';
-import { PostServiceBase } from '../services/index';
+import { PostType, LoginUser, CommentType } from '../models';
+import { PostServiceBase } from '../services';
 
 @Path('/posts')
 export class PostRoutesController {

@@ -1,11 +1,5 @@
-import { PostServiceBase } from './PostIocServices';
-import { UserServiceBase } from './UserIocService';
-import { AwsServiceBase } from './AwsIocServices';
-import { PersonDetailsServiceBase } from './PersonDetailsIocService';
-
-export {
-  PostServiceBase,
-  UserServiceBase,
-  AwsServiceBase,
-  PersonDetailsServiceBase,
-};
+export * from './PostIocServices';
+export * from './UserIocService';
+export * from './AwsIocServices';
+export * from './PersonDetailsIocService';
+export * from './interfaces';

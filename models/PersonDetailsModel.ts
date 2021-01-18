@@ -1,13 +1,5 @@
-import { Document, Schema, model } from 'mongoose';
-
-export interface PersonDetailsType extends Document {
-  First_Name: string;
-  Last_Name: string;
-  Gender: string;
-  Country: string;
-  Age: number;
-  Id: number;
-}
+import { Schema, model } from 'mongoose';
+import { PersonDetailsType } from './interfaces';
 
 const personDetailsSchema: Schema = new Schema(
   {
@@ -40,4 +32,9 @@ const personDetailsSchema: Schema = new Schema(
   { timestamps: true }
 );
 
-export default model<PersonDetailsType>('PersonDetail', personDetailsSchema);
+const PersonDetail = model<PersonDetailsType>(
+  'PersonDetail',
+  personDetailsSchema
+);
+
+export { PersonDetail };

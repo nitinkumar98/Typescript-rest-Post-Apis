@@ -1,6 +1,6 @@
 import { POST, Path, FileParam } from 'typescript-rest';
 import { Inject } from 'typescript-ioc';
-import { PersonDetailsServiceBase } from '../services/index';
+import { PersonDetailsServiceBase } from '../services';
 
 @Path('/excel')
 export class ExcelFileController {

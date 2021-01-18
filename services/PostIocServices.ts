@@ -1,28 +1,9 @@
 import { Container } from 'typescript-ioc';
 
-import Post, { PostType, LoginUser } from '../models/PostModel';
-import Comment, { CommentType } from '../models/CommentModel';
+import { Post, PostType, LoginUser, Comment, CommentType } from '../models';
+import { PostServiceBase } from './interfaces';
 
-export abstract class PostServiceBase {
-  public abstract createNewPost(post: PostType): Promise<Object>;
-  public abstract getPostById(id: string): Promise<PostType>;
-  public abstract getAllPosts(): Promise<Array<PostType>>;
-  public abstract updatePostById(
-    id: string,
-    postData: PostType
-  ): Promise<Object>;
-  public abstract deletePostById(id: string): Promise<Object>;
-  public abstract toCommentsOnPost(
-    id: string,
-    commentData: CommentType
-  ): Promise<Object>;
-  public abstract toGetAllCommentsOnPost(
-    id: string
-  ): Promise<Array<CommentType>>;
-  public abstract toLikePost(id: string, user: LoginUser): Promise<Object>;
-}
-
-class PostServiceBaseImp implements PostServiceBase {
+export class PostServiceBaseImp implements PostServiceBase {
   public async createNewPost(post: PostType): Promise<Object> {
     try {
       await Post.create(post);

@@ -6,11 +6,8 @@ import {
   ExcelToJsonHelperClass,
   JsonDataValidateHelper,
 } from '../helpers/index';
-import { PersonDetailsType, PersonDetail } from '../models/index';
-
-export abstract class PersonDetailsServiceBase {
-  public abstract uploadExcelFileAndSaveToDb(file: Express.Multer.File): Object;
-}
+import { PersonDetail, PersonDetailsType } from '../models/';
+import { PersonDetailsServiceBase } from './interfaces';
 
 export class PersonDetailsServiceBaseImp implements PersonDetailsServiceBase {
   public uploadExcelFileAndSaveToDb(file: Express.Multer.File): Object {
